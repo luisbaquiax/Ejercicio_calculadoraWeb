@@ -11,10 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Calculadora Web</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <h1>Calculadora</h1>
         <% if (request.getParameter("numero1") == null && (request.getParameter("numero2")) == null) {%>
-        <form method="GET" action="Calc">
+        <form method="GET" action="Calculadora.jsp">
             <label>Primer numero: </label>
             <input type="text" name="numero1" />
             <br />
@@ -43,40 +46,48 @@
         <%! double suma, multiplicacion, numeroMayor, potencia;%>
         <%! int numero1, numero2;%>
         <%! String binario1, binario2;%>
-        <%! Calculadora calculadora = new Calculadora();%>
+        <%! Operacion operacion = new Operacion();%>
         <%
             numero1 = Integer.parseInt(request.getParameter("numero1"));
             numero1 = Integer.parseInt(request.getParameter("numero2"));
+            suma = operacion.sumar(numero1, numero2);
+            multiplicacion = operacion.multiplicar(numero1, numero2);
+            numeroMayor = operacion.obtenerNumeroMayor(numero1, numero2);
+            potencia = operacion.obtenerPotencia(numero1, numero2);
+            binario1 = operacion.obtenerBinario(numero1);
+            binario2 = operacion.obtenerBinario(numero2);
         %>
-        <%if (request.getParameter("suma") != null) { %>
-        suma = calculadora.sumar(numero1, numero2);
-        <%} %>
-        <%if (request.getParameter("multiplicacion") != null) { %>
-        multiplicacion = calculadora.multiplicar(numero1, numero2);
-        <%} %>
-        <%if (request.getParameter("obtenerNumeroMayor") != null) { %>
-        numeroMayor = calculadora.obtenerNumeroMayor(numero1, numero2);
-        <%} %>
-        <%if (request.getParameter("obtenerPotencia") != null) { %>
-        potencia = calculadora.obtenerPotencia(numero1, numero2);
-        <%} %>
-        <%if (request.getParameter("obtenerBinario") != null) { %>
-        binario1 = calculadora.obtenerBinario(numero1);
-        <%} %>
-        <%if (request.getParameter("obtenerBinario2") != null) { %>
-        binario2 = calculadora.obtenerBinario(numero2);
-        <%}%>
+
         <P>     
             <B>Los cálculos son:</B>:     
-        <P>     
-            <%-- Se muestran los datos --%>
-            <B>Suma: </B>: <%= suma%><P>
-            <B>Multiplicacion: </B>: <%= multiplicacion%>
-            <B>Numero mayor: </B>: <%= numeroMayor%>
-            <B>Potencia n1^n2: </B>: <%= potencia%>
-            <B>Binario de numero1: </B>: <%= binario1%>
-            <B>Binario de numero2: </B>: <%= binario2%>
+        <P>
+            <B>Suma: </B>: <%= suma %>
+            <%--
+            <%if (request.getParameter("suma") != null) {%>
+            <B>Suma: </B>: <%= this.suma%>
+                <%} %>
+            <br>
+            <%if (request.getParameter("multiplicacion") != null) {%>
+            <B>Multiplicacion: </B>: <%= this.multiplicacion%>
+                <%} %>
+            <br>
+                <%if (request.getParameter("obtenerNumeroMayor") != null) {%>
+            <B>Numero mayor: </B>: <%= this.numeroMayor%>
+                <%} %>
+            <br>
+                <%if (request.getParameter("obtenerPotencia") != null) {%>
+            <B>Potencia n1^n2: </B>: <%= this.potencia%>
+                <%} %>
+            <br>
+                <%if (request.getParameter("obtenerBinario") != null) {%>
+            <B>Binario de numero1: </B>: <%= this.binario1%>
+                <%} %>
+            <br>
+                <%if (request.getParameter("obtenerBinario2") != null) {%>
+            <B>Binario de numero2: </B>: <%= this.binario2%>
+                <%}%> --%>
 
             <% }%>   
     </body>
 </html>
+
